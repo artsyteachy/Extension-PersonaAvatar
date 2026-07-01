@@ -119,11 +119,32 @@ function removePanel() {
     document.getElementById(PERSONA_PANEL_ID)?.remove();
 }
 
-function onChatMutation() {
+function onChatMutation(mutations) {
     if (isChatActive()) {
         createPanel();
     } else {
         removePanel();
+        return;
+    }
+
+    const newCharMessages = [];
+    for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+            if (node.nodeType !== Node.ELEMENT_NODE) continue;
+            if (!node.classList.contains('mes')) continue;
+            if (node.getAttribute('is_user') !== 'false') continue;
+            if (node.getAttribute('is_system') === 'true') continue;
+            newCharMessages.push(node);
+        }
+    }
+
+    // Skip bulk chat loads; only auto-update on a single new character message
+    if (newCharMessages.length !== 1) return;
+
+    const avatarEl = newCharMessages[0].querySelector('.avatar');
+    const avatarImg = avatarEl?.querySelector('img');
+    if (avatarImg?.getAttribute('src')) {
+        avatarEl.click();
     }
 }
 
