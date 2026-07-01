@@ -1,0 +1,23 @@
+{
+    "display_name": "Persona Avatar",
+    "loading_order": 1,
+    "dependencies": [],
+    "js": "src/index.js",
+    "css": "src/style.css",
+    "author": "Artsy Teachy",
+    "version": "1.0.0",
+    "homePage": "https://github.com/artsyteachy/Extension-PersonaAvatar",
+    "auto_update": true,
+    "minimum_client_version": "1.18.0",
+    "i18n": {
+    },
+    "hooks": {
+        "install": "onInstall",
+        "enable": "onEnable",
+        "activate": "onActivate",
+        "update": "onUpdate",
+        "clean": "onClean",
+        "disable": "onDisable",
+        "delete": "onUninstall"
+    }
+}
